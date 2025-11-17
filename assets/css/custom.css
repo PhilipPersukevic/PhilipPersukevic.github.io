@@ -74,8 +74,68 @@ p {
     border-color:rgba(8, 199, 18, 0.856) !important;
 }
 
-.social-links .bi-dribbble{
+.social-links .bi-dribbble {
     background-color: cyan !important;
     color:darkslategray !important;
     border-color:chartreuse !important;
+}
+
+.social-links .bi-behance:hover {
+    background-color: green !important;
+    color:cornflowerblue !important;
+    border-color: bisque !important;
+}
+
+.social-links .bi-github {
+    background-color: yellow !important;
+    color:rgb(37, 107, 238) !important;
+    border-color: rgb(243, 149, 35) !important;
+}
+
+.social-links .bi-linkedin:hover {
+    background-color: rgb(243, 161, 10) !important;
+    color:rgb(230, 20, 100) !important;
+    border-color: rgb(72, 235, 7) !important;
+}
+
+.index-page .header-toggle {
+    background-color: rgb(243, 180, 220) !important;
+    color:rgb(230, 200, 20) !important;
+    border-color: rgb(72, 235, 100) !important;
+}
+
+.header-container .bi-house{
+    background-color: rgb(70, 161, 10) !important;
+    color:rgb(230, 75, 100) !important;
+    border-color: rgb(72, 150, 7) !important;
+}
+
+.header-container .bi-person {
+    background-color: rgb(70, 161, 10) !important;
+    color:rgb(230, 75, 100) !important;
+    border-color: rgb(72, 150, 7) !important;
+}
+
+.header-container .bi-file-earmark-text {
+    background-color: rgb(70, 161, 10) !important;
+    color:rgb(230, 75, 100) !important;
+    border-color: rgb(72, 150, 7) !important;
+}
+
+.header-container .bi-images {
+    background-color: rgb(70, 161, 10) !important;
+    color:rgb(230, 75, 100) !important;
+    border-color: rgb(72, 150, 7) !important;
+}
+
+.header-container .bi-hdd-stack {
+    background-color: rgb(70, 161, 10) !important;
+    color:rgb(230, 75, 100) !important;
+    border-color: rgb(72, 150, 7) !important;
+}
+
+.header-container .bi-menu-button {
+    background-color: rgb(70, 161, 10) !important;
+    color:rgb(230, 75, 100) !important;
+    border-color: rgb(72, 150, 7) !important;
 }
