@@ -98,7 +98,7 @@ p {
     border-color: rgb(72, 235, 7) !important;
 }
 
-.index-page .header-toggle {
+.index-page .header-toggle:hover {
     background-color: rgb(243, 180, 220) !important;
     color:rgb(230, 200, 20) !important;
     border-color: rgb(72, 235, 100) !important;
