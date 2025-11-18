@@ -31,7 +31,7 @@ h3 {
 
 h4 {
     text-align: justify !important;
-    color: rgb(54, 54, 1) !important;
+    color: rgb(53, 211, 5) !important;
     font-size: 28px !important;
     font-weight: 600 !important;
     line-height: 1.4 !important;
@@ -238,4 +238,30 @@ p {
     background-color: rgb(20, 20, 20);
     border-radius: 30px;
     box-shadow: 10px 10px 20px rgba(0,0,0,0.7) !important;
+}
+
+.table-new table {
+    width: 80%;                 
+    margin: 20px auto;          
+    border-collapse: collapse;   
+    font-family: sans-serif;     
+}
+
+.table-new th, .table-new td {
+    padding: 15px 20px;                     
+    border: 1px solid #ccc;      
+}
+
+.table-new .header-row {
+    background-color: rgb(82, 16, 236);  
+    color: rgb(252, 116, 6);             
+    font-weight: bold;
+}
+
+.table-new .table-row:hover {
+    background-color: rgb(200, 200, 255);
+}
+
+.table-new th, .table-new td {
+    text-align: center !important;
 }
