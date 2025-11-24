@@ -39,7 +39,11 @@
 </head>
 
 <body class="index-page">
-
+  <div id="preloader">
+  <div class="spinner-border text-primary" role="status">
+  <span class="visually-hidden">Loading...</span>
+  </div>
+  </div>
   <header id="header" class="header dark-background d-flex flex-column justify-content-center">
   <i class="header-toggle d-xl-none bi bi-list"></i>
 
@@ -61,11 +65,11 @@
     </nav>
 
       <div class="social-links text-center">
-        <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
-        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-        <a href="#" class="google-plus"><i class="bi bi-skype"></i></a>
-        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+        <a href="#" class="twitter social-icon"><i class="bi bi-twitter-x"></i></a>
+        <a href="#" class="facebook social-icon"><i class="bi bi-facebook"></i></a>
+        <a href="#" class="instagram social-icon"><i class="bi bi-instagram"></i></a>
+        <a href="#" class="google-plus social-icon"><i class="bi bi-skype"></i></a>
+        <a href="#" class="linkedin social-icon"><i class="bi bi-linkedin"></i></a>
       </div>
 
     </div>
@@ -99,10 +103,10 @@
                 </div>
 
                 <div class="social-links">
-                  <a href="#"><i class="bi bi-dribbble"></i></a>
-                  <a href="#"><i class="bi bi-behance"></i></a>
-                  <a href="#"><i class="bi bi-github"></i></a>
-                  <a href="#"><i class="bi bi-linkedin"></i></a>
+                  <a href="#" class="social-icon"><i class="bi bi-dribbble"></i></a>
+                  <a href="#" class="social-icon"><i class="bi bi-behance"></i></a>
+                  <a href="#" class="social-icon"><i class="bi bi-github"></i></a>
+                  <a href="#" class="social-icon"><i class="bi bi-linkedin"></i></a>
                 </div>
               </div>
             </div>
@@ -125,13 +129,16 @@
     <!-- About Section -->
     <section id="about" class="about section">
 
+      <div class="background-shape shape-circle-1"></div>
+      <div class="background-shape shape-circle-2"></div>
+      <div class="background-shape shape-triangle"></div>
       <div class="container" data-aos="fade-up" data-aos-delay="100">
 
         <div class="row">
             <div class="profile-card">
               <div class="profile-header">
                 <div class="profile-image">
-                  <img src="assets/img/profile/profile-square-3.webp" alt="Profile Image" class="img-fluid">
+                  <img src="assets/img/profile/profile-square-3.webp" class="animate-zoom-rotate" alt="Profile Image" class="img-fluid">
                 </div>
                 <div class="profile-badge">
                   <i class="bi bi-check-circle-fill"></i>
@@ -377,7 +384,9 @@
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2>Services</h2>
-      </div><!-- End Section Title -->
+      </div>
+      
+      <div class="animated-gradient-bg"></div><!-- End Section Title -->
       
       <video width="640" height="360" controls>
         <source src="assets/media/video.mp4" type="video/mp4">
@@ -530,9 +539,6 @@
 
   <!-- Scroll Top -->
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-  <!-- Preloader -->
-  <div id="preloader"></div>
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
