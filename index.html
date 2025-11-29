@@ -474,43 +474,72 @@
             </div>
           </div>
 
-          <div class="col-lg-7">
-            <div class="contact-form">
-              <h3>Get In Touch</h3>
-              <p>Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Vestibulum ante ipsum primis.</p>
+        <div class="col-lg-7">
+          <div class="contact-form">
+            <h3>Get In Touch</h3>
+            <p>Please fill out the form to provide feedback or contact me.</p>
 
-              <form action="forms/contact.php" method="post" class="php-email-form">
-                <div class="row gy-4">
+            <form id="custom-contact-form" action="" method="post" class="php-email-form">
+              <div class="row gy-4">
 
-                  <div class="col-md-6">
-                    <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
-                  </div>
+              <div class="col-md-6">
+                <input type="text" name="vardas" id="vardas" class="form-control" placeholder="Your Name" required="">
+                <div class="invalid-feedback" id="vardas-error">Name must contain only letters.</div>
+              </div>
 
-                  <div class="col-md-6 ">
-                    <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
-                  </div>
+              <div class="col-md-6">
+                <input type="text" name="pavarde" id="pavarde" class="form-control" placeholder="Your Last Name" required="">
+                <div class="invalid-feedback" id="pavarde-error">Last Name must contain only letters.</div>
+              </div>
 
-                  <div class="col-12">
-                    <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
-                  </div>
+              <div class="col-md-6">
+                <input type="email" class="form-control" name="el_pastas" id="el_pastas" placeholder="Your Email" required="">
+                <div class="invalid-feedback" id="el_pastas-error">Enter a valid email address.</div>
+              </div>
+              
+              <div class="col-md-6">
+                <input type="tel" class="form-control" name="telefonas" id="telefonas" placeholder="Phone Number" required="">
+                <div class="invalid-feedback" id="telefonas-error">Phone number must be in the format +370 6xx xxxxx.</div>
+              </div>
 
-                  <div class="col-12">
-                    <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
-                  </div>
+              <div class="col-12">
+                <input type="text" class="form-control" name="adresas" id="adresas" placeholder="Address" required="">
+                <div class="invalid-feedback" id="adresas-error">Address field cannot be empty.</div>
+              </div>
 
-                  <div class="col-12 text-center">
-                    <div class="loading">Loading</div>
-                    <div class="error-message"></div>
-                    <div class="sent-message">Your message has been sent. Thank you!</div>
+              <div class="col-12">
+              <h4>Rate these aspects (1 - Worst, 10 - Best):</h4>
+              </div>
+ 
+              <div class="col-12">
+                <label for="vertinimas1" class="form-label d-block">1. Website Design: <span id="vertinimas1_value">5</span></label>
+                <input type="range" class="form-range" min="1" max="10" value="5" id="vertinimas1" name="vertinimas1">
+              </div>
 
-                    <button type="submit" class="btn">Send Message</button>
-                  </div>
+              <div class="col-12">
+                <label for="vertinimas2" class="form-label d-block">2. Clarity of Information: <span id="vertinimas2_value">5</span></label>
+                <input type="range" class="form-range" min="1" max="10" value="5" id="vertinimas2" name="vertinimas2">
+              </div>
 
-                </div>
-              </form>
+              <div class="col-12">
+                <label for="vertinimas3" class="form-label d-block">3. Overall Impression: <span id="vertinimas3_value">5</span></label>
+                <input type="range" class="form-range" min="1" max="10" value="5" id="vertinimas3" name="vertinimas3">
+              </div>
+              
+              <div class="col-12" id="submission-details" style="margin-top: 20px;"></div>
+              <div class="col-12 text-center">
+              <div class="loading">Loading</div>
+              <div class="error-message"></div>
+              <div class="sent-message">Your message has been sent. Thank you!</div>
+
+              <button type="submit" class="btn" id="submit-button" disabled>Submit</button>
+              </div>
 
             </div>
-          </div>
+          </form>
+
+        </div>
+</div>
 
         </div>
 
@@ -554,7 +583,25 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/custom.js"></script>
 
+  <div id="success-popup" style="
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px 40px;
+    background-color: #4CAF50; /* Žalia spalva sėkmei */
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000; /* Kad būtų virš kitų elementų */
+    display: none; /* Pradžioje paslėptas */
+    font-size: 1.2em;">
+    Duomenys pateikti sėkmingai! ✅
+    </div>
+
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 </body>
 
 </html>
