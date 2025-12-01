@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const NAME_REGEX = /^[A-ZĄČĘĖĮŠŲŪŽa-ząčęėįšųūž\s'-]+$/;
     const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
-    const MIN_PHONE_LENGTH = 13; 
+    const MIN_PHONE_LENGTH = 15; 
 
     const validationFields = [
         { id: 'vardas', type: 'name' },
@@ -115,49 +115,60 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     function formatPhoneNumber(inputField) {
+        const currentCursorPosition = inputField.selectionStart;
+        const previousValueLength = inputField.value.length;
+        
         let digits = inputField.value.replace(/\D/g, ''); 
-
-        if (digits.startsWith('370')) {
-            digits = digits.substring(3);
+        
+        if (digits.startsWith('3706')) {
+             digits = digits.substring(4);
+        } else if (digits.startsWith('370')) {
+             digits = digits.substring(3);
         }
         
         const MAX_DIGITS = 8; 
         digits = digits.substring(0, MAX_DIGITS);
 
-        let formattedValue = '';
+        let formattedValue = '+370 6'; 
         
         if (digits.length > 0) {
-            formattedValue = '+370 ';
+            
+            formattedValue += ' '; 
             
             if (digits.length > 3) {
-                formattedValue += digits.substring(0, 3) + ' ';
-                if (digits.length > 7) {
-                    formattedValue += digits.substring(3, 7) + ' ' + digits.substring(7);
-                } else {
-                     formattedValue += digits.substring(3);
-                }
+                formattedValue += digits.substring(0, 3) + ' ' + digits.substring(3);
             } else {
                 formattedValue += digits;
             }
         }
-
-        inputField.value = formattedValue.trim();
         
+        inputField.value = formattedValue.trim();
+
+        const minCursorPosition = 7; 
+        
+        let newCursorPosition = currentCursorPosition + (inputField.value.length - previousValueLength);
+        
+        if (inputField === document.activeElement) {
+             inputField.setSelectionRange(Math.max(minCursorPosition, newCursorPosition), Math.max(minCursorPosition, newCursorPosition));
+        }
+
         const errorField = document.getElementById('telefonas-error'); 
-        const isCompleted = inputField.value.length === MIN_PHONE_LENGTH;
+        const isCompleted = inputField.value.length === MIN_PHONE_LENGTH; 
 
         if (errorField) {
-            if (!isCompleted && inputField.value.length > 4) {
-                 inputField.classList.add('is-invalid');
-                 inputField.classList.remove('is-valid');
-                 errorField.textContent = 'Phone number is too short or incomplete.';
-            } else if (isCompleted) {
-                 inputField.classList.remove('is-invalid');
-                 inputField.classList.add('is-valid');
-            } else {
-                 inputField.classList.remove('is-invalid');
-                 inputField.classList.remove('is-valid');
-            }
+             if (!isCompleted && inputField.value.length > 7) { 
+                  inputField.classList.add('is-invalid');
+                  inputField.classList.remove('is-valid');
+                  errorField.textContent = 'Phone number is too short or incomplete.';
+             } else if (isCompleted) {
+                  inputField.classList.remove('is-invalid');
+                  inputField.classList.add('is-valid');
+                  errorField.textContent = '';
+             } else {
+                  inputField.classList.remove('is-invalid');
+                  inputField.classList.remove('is-valid');
+                  errorField.textContent = '';
+             }
         }
         
         checkFormValidity(); 
@@ -175,21 +186,57 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     
+    const MIN_CURSOR_POSITION = 7; 
+
     if (phoneInput) {
+        
+        if (phoneInput.value === '') {
+             phoneInput.value = '+370 6';
+        }
+        
         phoneInput.addEventListener('input', () => {
             formatPhoneNumber(phoneInput);
         });
+        
+        phoneInput.addEventListener('keydown', (event) => {
+            const cursorPosition = phoneInput.selectionStart;
+            const key = event.key;
+            
+            if ((key === 'Backspace' || key === 'Delete' || key === 'ArrowLeft') && cursorPosition <= MIN_CURSOR_POSITION) {
+                event.preventDefault(); 
+                
+                if (key === 'ArrowLeft') {
+                    phoneInput.setSelectionRange(MIN_CURSOR_POSITION, MIN_CURSOR_POSITION);
+                }
+            }
+
+            if (phoneInput.value.length >= MIN_PHONE_LENGTH && !['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab', 'Home', 'End'].includes(key)) {
+                event.preventDefault();
+            }
+        });
+        
+        phoneInput.addEventListener('focus', () => {
+            if (phoneInput.value.trim().length < MIN_CURSOR_POSITION) {
+                 phoneInput.value = '+370 6';
+            }
+            const currentLength = phoneInput.value.length;
+            phoneInput.setSelectionRange(Math.max(MIN_CURSOR_POSITION, currentLength), Math.max(MIN_CURSOR_POSITION, currentLength));
+        });
+        
         phoneInput.addEventListener('blur', () => {
-             if (phoneInput.value.length > 4 && phoneInput.value.length < MIN_PHONE_LENGTH) {
-                document.getElementById('telefonas-error').textContent = 'Phone number is incomplete.';
-                phoneInput.classList.add('is-invalid');
+             const errorField = document.getElementById('telefonas-error');
+             
+             if (phoneInput.value.length > MIN_CURSOR_POSITION && phoneInput.value.length < MIN_PHONE_LENGTH) {
+                 if (errorField) {
+                     errorField.textContent = 'Phone number is incomplete.';
+                     phoneInput.classList.add('is-invalid');
+                 }
+             } else if (phoneInput.value.trim().length === MIN_CURSOR_POSITION) {
+                 phoneInput.classList.remove('is-valid', 'is-invalid');
+                 if (errorField) errorField.textContent = '';
              }
              checkFormValidity();
         });
-        
-        if (phoneInput.value === '') {
-             phoneInput.value = '+370 ';
-        }
     }
     
     if (submitButton) {
@@ -272,7 +319,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 updateSliderValue('vertinimas1', 'vertinimas1_value');
                 updateSliderValue('vertinimas2', 'vertinimas2_value');
                 updateSliderValue('vertinimas3', 'vertinimas3_value');
-                phoneInput.value = '+370 '; 
+                phoneInput.value = '+370 6'; 
                 
                 checkFormValidity(); 
                 
