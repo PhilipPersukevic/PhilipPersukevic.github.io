@@ -329,3 +329,141 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error("The contact form, submission details container, or success popup was not found.");
     }
 });
+
+const korteles = ['🍎','🍌','🍇','🍉','🍓','🥝','🍒','🍑','🥭','🍍','🍋','🥥'];
+const startBtn = document.getElementById('start-button');
+const resetBtn = document.getElementById('reset-button');
+const difficultySelect = document.getElementById('difficulty-select');
+const gameBoard = document.getElementById('game-board');
+const movesDisplay = document.getElementById('moves-count');
+const matchesDisplay = document.getElementById('matches-count');
+const totalPairsDisplay = document.getElementById('total-pairs');
+const timerDisplay = document.getElementById('timer-display');
+const winMessage = document.getElementById('win-message');
+const finalMoves = document.getElementById('final-moves');
+const finalTime = document.getElementById('final-time');
+const bestEasy = document.getElementById('best-easy');
+const bestHard = document.getElementById('best-hard');
+const newRecordNote = document.querySelector('.current-best-note');
+
+let moves = 0;
+let matches = 0;
+let totalPairs = 6;
+let flippedCards = [];
+let timer;
+let seconds = 0;
+
+function shuffle(array){
+  for(let i=array.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [array[i],array[j]]=[array[j],array[i]];
+  }
+  return array;
+}
+
+function generateBoard(){
+  clearInterval(timer);
+  seconds=0;
+  timerDisplay.textContent='0:00';
+  moves=0;
+  matches=0;
+  movesDisplay.textContent=moves;
+  matchesDisplay.textContent=matches;
+  winMessage.classList.add('d-none');
+  newRecordNote.classList.add('d-none');
+
+  let level = difficultySelect.value;
+  let rows, cols;
+  if(level==='easy'){rows=3; cols=4; totalPairs=6;}
+  else{rows=4; cols=6; totalPairs=12;}
+  totalPairsDisplay.textContent=totalPairs;
+
+  let selectedCards = korteles.slice(0,totalPairs);
+  let cardsArray = shuffle([...selectedCards,...selectedCards]);
+
+  gameBoard.innerHTML='';
+  gameBoard.style.gridTemplateColumns=`repeat(${cols}, auto)`;
+
+  cardsArray.forEach(symbol=>{
+    const card = document.createElement('div');
+    card.classList.add('card');
+    card.textContent='';
+    card.dataset.symbol=symbol;
+    card.addEventListener('click',flipCard);
+    gameBoard.appendChild(card);
+  });
+  gameBoard.classList.remove('disabled');
+}
+
+difficultySelect.addEventListener('change',()=>{
+  generateBoard();
+});
+
+
+function flipCard(){
+  if(flippedCards.length<2 && !this.classList.contains('flipped') && !this.classList.contains('matched')){
+    this.classList.add('flipped');
+    this.textContent=this.dataset.symbol;
+    flippedCards.push(this);
+    if(flippedCards.length===2){
+      moves++;
+      movesDisplay.textContent=moves;
+      if(flippedCards[0].dataset.symbol===flippedCards[1].dataset.symbol){
+        flippedCards.forEach(c=>c.classList.add('matched'));
+        matches++;
+        matchesDisplay.textContent=matches;
+        flippedCards=[];
+        if(matches===totalPairs) endGame();
+      }else{
+        setTimeout(()=>{
+          flippedCards.forEach(c=>{c.classList.remove('flipped'); c.textContent='';});
+          flippedCards=[];
+        },1000);
+      }
+    }
+  }
+}
+
+function startTimer(){
+  clearInterval(timer);
+  timer = setInterval(()=>{
+    seconds++;
+    let min=Math.floor(seconds/60);
+    let sec=seconds%60;
+    timerDisplay.textContent=`${min}:${sec<10?'0'+sec:sec}`;
+  },1000);
+}
+
+function endGame(){
+  clearInterval(timer);
+  finalMoves.textContent=moves;
+  finalTime.textContent=timerDisplay.textContent;
+  winMessage.classList.remove('d-none');
+  let level = difficultySelect.value;
+  let best = localStorage.getItem('best-'+level);
+  if(!best || moves<best){
+    localStorage.setItem('best-'+level,moves);
+    newRecordNote.classList.remove('d-none');
+  }
+  bestEasy.textContent=localStorage.getItem('best-easy') || 'N/A';
+  bestHard.textContent=localStorage.getItem('best-hard') || 'N/A';
+}
+
+startBtn.addEventListener('click',()=>{
+  generateBoard();
+  startTimer();
+  resetBtn.disabled=false;
+});
+
+resetBtn.addEventListener('click',()=>{
+  generateBoard();
+  startTimer();
+});
+
+difficultySelect.addEventListener('change',()=>{
+  generateBoard();
+});
+window.addEventListener('load',()=>{
+  bestEasy.textContent=localStorage.getItem('best-easy') || 'N/A';
+  bestHard.textContent=localStorage.getItem('best-hard') || 'N/A';
+});

@@ -538,3 +538,47 @@ body.loaded #preloader {
         opacity: 0.05; 
     }
 }
+
+#game {
+  padding: 50px 0;
+}
+.game-board {
+  display: grid;
+  gap: 10px;
+  justify-content: center;
+}
+.card {
+  width: 80px;
+  height: 100px;
+  background-color: #007bff;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  cursor: pointer;
+  border-radius: 8px;
+  user-select: none;
+  transition: transform 0.3s;
+}
+.card.flipped {
+  background-color: #fff;
+  color: #000;
+  transform: rotateY(180deg);
+}
+.card.matched {
+  background-color: #28a745;
+  cursor: default;
+}
+.stats-box p {
+  margin: 0.3rem 0;
+}
+.initial-message {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #666;
+}
+.disabled {
+  pointer-events: none;
+  opacity: 0.6;
+}

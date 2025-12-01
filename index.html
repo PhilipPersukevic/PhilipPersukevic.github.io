@@ -547,6 +547,61 @@
 
     </section><!-- /Contact Section -->
 
+    <section id="game" class="game section">
+
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Mano Žaidimas</h2>
+        <p>Išbandykite savo atmintį atviruodami korteles!</p>
+      </div><div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="game-controls mb-4">
+          <div class="row align-items-center justify-content-center">
+            
+            <div class="col-md-4 mb-3">
+              <label for="difficulty-select" class="form-label">Pasirinkite sudėtingumo lygį:</label>
+              <select id="difficulty-select" class="form-select">
+                <option value="easy">Lengvas (4x3)</option>
+                <option value="hard">Sunkus (6x4)</option>
+              </select>
+            </div>
+            
+            <div class="col-md-4 mb-3 d-flex justify-content-around">
+              <button id="start-button" class="btn btn-success me-2">Start</button>
+              <button id="reset-button" class="btn btn-warning" disabled>Atnaujinti</button>
+            </div>
+            
+          </div>
+        </div>
+
+        <div class="row">
+          
+          <div class="col-md-3 mb-4">
+            <div class="stats-box p-3 bg-light rounded shadow-sm">
+              <h4>Statistika</h4>
+              <p>Ėjimų skaičius: <span id="moves-count">0</span></p>
+              <p>Sutapusių porų: <span id="matches-count">0</span> / <span id="total-pairs">6</span></p>
+              <p>Laikas: <span id="timer-display">0:00</span></p>
+              
+              <h4 class="mt-3">Geriausi rezultatai</h4>
+              <p>Lengvas (4x3): <span id="best-easy">N/A</span> ėjimų</p>
+              <p>Sunkus (6x4): <span id="best-hard">N/A</span> ėjimų</p>
+              <p class="current-best-note d-none text-success">**Naujas rekordas!**</p>
+            </div>
+          </div>
+          
+          <div class="col-md-9">
+            <div id="game-board" class="game-board disabled">
+              <div class="initial-message">Pasirinkite lygį ir spauskite Start!</div>
+            </div>
+            
+            <div id="win-message" class="alert alert-success mt-4 text-center d-none" role="alert">
+              <strong>Sveikiname! Jūs laimėjote!</strong> Užtrukote <span id="final-moves">0</span> ėjimų per <span id="final-time">0:00</span>.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
   </main>
 
   <footer id="footer" class="footer position-relative">
